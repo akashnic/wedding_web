@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Great+Vibes&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Core Indian Cinematic Wedding Palette */
+  --color-burgundy: #651F30;
+  --color-dusty-rose: #A8697A;
+  --color-espresso: #3E2C22;
+  --color-warm-ivory: #EDDFC4;
+  --color-sage: #B7BB88;
+  --color-olive: #6E6B41;
+
+  /* Background Palette Shades */
+  --color-bg-primary: #F8F3EA;     /* Warm Ivory (Primary background) */
+  --color-bg-secondary: #EDDFC4;   /* Warm Parchment */
+  --color-bg-romantic: #F5E9EB;    /* Light Dusty Rose tint */
+  --color-bg-botanical: #EEF0E0;   /* Light Sage tint */
+  --color-bg-burgundy-tint: #F1E5E8;/* Light Burgundy tint */
+
+  /* Legacy alias support */
+  --color-cinematic-black: #3E2C22;
+  --color-deep-maroon: #651F30;
+  --color-wine: #651F30;
+  --color-royal-red: #651F30;
+  --color-antique-gold: #A8697A;
+  --color-champagne-gold: #EDDFC4;
+  --color-ivory: #EDDFC4;
+  --color-warm-white: #F8F3EA;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "DM Sans", "Lora", sans-serif;
+  --font-accent: "Great Vibes", cursive;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: #F8F3EA;
+  color: #3E2C22;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+}
+
+.font-accent {
+  font-family: var(--font-accent);
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-blessings-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+.blessings-marquee-wrapper:hover .animate-blessings-marquee,
+.blessings-marquee-wrapper:focus-within .animate-blessings-marquee {
+  animation-play-state: paused;
+}
+
+
