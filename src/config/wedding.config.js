@@ -129,5 +129,15 @@ export const weddingConfig = {
       // Example: "https://script.google.com/macros/s/AKfycby.../exec"
       rsvpScriptUrl: "https://script.google.com/macros/s/AKfycbyEj-_LzG2aUY6-aw_118coQZJ4uxZETeJQdfKGgNf62wxopadL70D3Xymsio4EuiEEnw/exec"
     }
+  },
+
+  audio: {
+    enabled: true,
+    autoPlay: true,
+    mantraVolume: 0.35,      // Low volume for Sacred Ganesh Mantra (0.0 to 1.0)
+    bgMusicVolume: 0.25,     // Low volume for soothing background music (0.0 to 1.0)
+    mantraTitle: "Sacred Ganesh Mantra",
+    bgMusicTitle: "Soothing Wedding Theme"
   }
 };
+

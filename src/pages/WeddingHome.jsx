@@ -11,10 +11,12 @@ import Forever from '../components/chapters/Forever';
 import PageContainer from '../components/layout/PageContainer';
 import { weddingConfig } from '../config/wedding.config';
 import PetalEffect from '../components/effects/PetalEffect';
+import BackgroundMusic from '../components/effects/BackgroundMusic';
 
 export default function WeddingHome() {
   return (
     <PageContainer>
+      <BackgroundMusic config={weddingConfig} />
       <PetalEffect />
       <OpeningSequence config={weddingConfig} />
       <MeetCouple config={weddingConfig} />

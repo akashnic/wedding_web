@@ -59,6 +59,16 @@ const DEFAULT_BLESSINGS = [
   }
 ];
 
+// Quick preset blessings for guests to easily choose and customize
+const PRESET_BLESSINGS = [
+  "Wishing dearest Akash & Vaishnavi a lifetime filled with boundless love, shared laughter, and eternal prosperity! 🌸",
+  "May your sacred union be blessed with immense happiness, good health, and prosperous beginnings! ✨",
+  "Heartiest congratulations to the beautiful couple! May God shower His choicest blessings upon you both. 🙏",
+  "Two wonderful souls uniting for a lifetime of love and companionship. Wishing you a blissful married life! 💖",
+  "May the sacred bond of love between you two grow stronger and sweeter with each passing day! 🥂",
+  "Warmest wishes on your wedding day! May your journey together be filled with boundless joy and harmony. 🌟"
+];
+
 export default function MapAndRSVPBlessings({ config }) {
   // RSVP Form State
   const [rsvpName, setRsvpName] = useState('');
@@ -567,12 +577,23 @@ export default function MapAndRSVPBlessings({ config }) {
 
                       {/* Blessings Textarea */}
                       <div>
-                        <label 
-                          htmlFor="blessing-message" 
-                          className="block text-xs font-body font-semibold tracking-wider text-[#651F30] uppercase mb-1.5"
-                        >
-                          Blessings &amp; Wishes <span className="text-[#A8697A]">*</span>
-                        </label>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label 
+                            htmlFor="blessing-message" 
+                            className="block text-xs font-body font-semibold tracking-wider text-[#651F30] uppercase"
+                          >
+                            Blessings &amp; Wishes <span className="text-[#A8697A]">*</span>
+                          </label>
+                          {blessingMessage && (
+                            <button
+                              type="button"
+                              onClick={() => setBlessingMessage('')}
+                              className="text-[11px] font-body text-[#A8697A] hover:text-[#651F30] underline cursor-pointer transition-colors"
+                            >
+                              Clear Text
+                            </button>
+                          )}
+                        </div>
                         <textarea
                           id="blessing-message"
                           name="blessingMessage"
@@ -580,9 +601,40 @@ export default function MapAndRSVPBlessings({ config }) {
                           rows={3}
                           value={blessingMessage}
                           onChange={(e) => setBlessingMessage(e.target.value)}
-                          placeholder="Write your heartfelt blessings and wishes for Akash &amp; Vaishnavi..."
+                          placeholder="Write your heartfelt blessings and wishes, or choose a preset below..."
                           className="w-full px-3.5 py-2.5 rounded-xl bg-[#FFFDF8] border border-[#A8697A]/40 text-[#3E2C22] placeholder-[#3E2C22]/40 font-body text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#651F30]/40 focus:border-[#651F30] transition shadow-xs resize-y"
                         ></textarea>
+                      </div>
+
+                      {/* Custom Blessing Messages / Quick Preset Wishes */}
+                      <div className="space-y-2 pt-0.5">
+                        <div className="flex items-center gap-1.5 text-xs font-body font-semibold tracking-wider text-[#651F30] uppercase">
+                          <Sparkles className="w-3.5 h-3.5 text-[#C9A45C]" />
+                          <span>Or Choose a Quick Wish (Tap to Select)</span>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {PRESET_BLESSINGS.map((preset, idx) => {
+                            const isSelected = blessingMessage.trim() === preset.trim();
+                            return (
+                              <button
+                                key={idx}
+                                type="button"
+                                onClick={() => setBlessingMessage(preset)}
+                                className={`text-left p-2.5 sm:p-3 rounded-xl border text-xs sm:text-[13px] font-body leading-relaxed transition-all duration-200 cursor-pointer flex items-start gap-2 ${
+                                  isSelected
+                                    ? 'bg-[#651F30] text-[#FFFDF8] border-[#651F30] shadow-sm ring-2 ring-[#651F30]/20'
+                                    : 'bg-[#FFFDF8] hover:bg-[#F8F3EA] text-[#3E2C22]/85 border-[#A8697A]/30 hover:border-[#651F30]/50 shadow-xs active:scale-[0.99]'
+                                }`}
+                              >
+                                <span className={`text-xs mt-0.5 shrink-0 ${isSelected ? 'text-[#C9A45C] font-bold' : 'text-[#A8697A]'}`}>
+                                  {isSelected ? '✓' : '❝'}
+                                </span>
+                                <span className="line-clamp-2">{preset}</span>
+                              </button>
+                            );
+                          })}
+                        </div>
                       </div>
 
                       {/* Send Button */}
