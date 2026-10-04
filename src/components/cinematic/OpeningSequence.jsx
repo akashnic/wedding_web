@@ -10,7 +10,12 @@ export default function OpeningSequence({ config }) {
   // Automatic progression for opening sequence with slower, cinematic timing
   useEffect(() => {
     if (step >= 2 && step <= 5) {
-      const duration = step === 5 ? 4000 : 2500;
+      const duration = 
+        step === 2 ? 4400 : 
+        step === 3 ? 5000 : 
+        step === 4 ? 2800 : 
+        4000; // step 5
+
       const timer = setTimeout(() => {
         if (step < 5) {
           setStep((prev) => prev + 1);
@@ -93,33 +98,52 @@ export default function OpeningSequence({ config }) {
         {step === 2 && (
           <motion.div 
             key="scene2" 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }} 
-            exit={{ opacity: 0, scale: 1.02 }} 
-            transition={{ duration: 0.8 }} 
-            className="z-10 text-center px-4"
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0, scale: 1.04, transition: { duration: 0.7 } }} 
+            className="z-10 text-center px-4 flex flex-col items-center justify-center space-y-3 sm:space-y-5"
           >
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-display text-[#FFF8EC] tracking-widest text-center drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
-              OUR FOREVER BEGINS
-            </h1>
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-2xl sm:text-4xl md:text-5xl font-display text-[#FFF8EC] tracking-widest uppercase drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]"
+            >
+              Two Hearts
+            </motion.h2>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-2xl sm:text-4xl md:text-5xl font-display text-[#EDDFC4] tracking-widest uppercase drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]"
+            >
+              One Promise
+            </motion.h2>
+
+            <motion.h1 
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.9, delay: 2.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-3xl sm:text-5xl md:text-6xl font-display text-[#C9A45C] tracking-widest uppercase font-semibold drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)] pt-2"
+            >
+              Forever
+            </motion.h1>
           </motion.div>
         )}
 
         {step === 3 && (
           <motion.div 
             key="scene3" 
-            initial={{ opacity: 0, y: 15 }} 
+            initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
-            exit={{ opacity: 0, y: -15 }} 
-            transition={{ duration: 0.8 }} 
-            className="text-center z-10 px-4"
+            exit={{ opacity: 0, y: -20, transition: { duration: 0.7 } }} 
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }} 
+            className="text-center z-10 px-6 max-w-4xl mx-auto flex flex-col items-center justify-center"
           >
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-display text-[#FFF8EC] tracking-widest drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
-              WITH
-            </h2>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-display text-[#FFF8EC] tracking-widest mt-4 drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]">
-              TWO PEOPLE
-            </h2>
+            <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-display text-[#FFF8EC] italic font-normal tracking-wide leading-snug sm:leading-relaxed drop-shadow-[0_4px_20px_rgba(0,0,0,0.7)]">
+              With Love in our hearts and blessings all around, we begin our forever.
+            </p>
           </motion.div>
         )}
 
