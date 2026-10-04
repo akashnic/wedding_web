@@ -17,7 +17,14 @@ export default function BackgroundMusic({ config }) {
 
   const audioRef = useRef(null);
   const userInteractedRef = useRef(false);
+  const wasPlayingBeforeHiddenRef = useRef(false);
+  const isMutedRef = useRef(false);
   const tooltipTimeoutRef = useRef(null);
+
+  // Keep isMutedRef updated
+  useEffect(() => {
+    isMutedRef.current = isMuted;
+  }, [isMuted]);
 
   // Helper to trigger temporary track banner/tooltip
   const triggerTooltip = (text) => {
@@ -102,12 +109,48 @@ export default function BackgroundMusic({ config }) {
     window.addEventListener('touchstart', handleFirstInteraction, { passive: true });
     window.addEventListener('keydown', handleFirstInteraction, { passive: true });
 
+    // Page Visibility and App Lifecycle Handling (pause on screen lock/minimize/close)
+    const handleVisibilityChange = () => {
+      if (!audioRef.current) return;
+      if (document.hidden) {
+        if (!audioRef.current.paused) {
+          wasPlayingBeforeHiddenRef.current = true;
+          audioRef.current.pause();
+          setIsPlaying(false);
+        }
+      } else {
+        if (wasPlayingBeforeHiddenRef.current && !isMutedRef.current) {
+          audioRef.current.play().then(() => {
+            setIsPlaying(true);
+          }).catch((err) => {
+            console.log('Resume audio on visibility error:', err);
+          });
+          wasPlayingBeforeHiddenRef.current = false;
+        }
+      }
+    };
+
+    const handlePageHide = () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = '';
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', handlePageHide);
+    window.addEventListener('beforeunload', handlePageHide);
+
     return () => {
       audio.pause();
+      audio.src = '';
       audio.removeEventListener('ended', handleTrackEnded);
       window.removeEventListener('click', handleFirstInteraction);
       window.removeEventListener('touchstart', handleFirstInteraction);
       window.removeEventListener('keydown', handleFirstInteraction);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pagehide', handlePageHide);
+      window.removeEventListener('beforeunload', handlePageHide);
       if (tooltipTimeoutRef.current) clearTimeout(tooltipTimeoutRef.current);
     };
   }, [isEnabled]);
