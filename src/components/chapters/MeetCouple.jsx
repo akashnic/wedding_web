@@ -55,7 +55,7 @@ export default function MeetCouple({ config }) {
             
             {/* Romantic Quote */}
             <p className="text-base sm:text-lg md:text-xl font-body text-[#A8697A] font-light max-w-2xl mx-auto mb-4 italic leading-relaxed">
-              "Two souls with but a single thought, two hearts that beat as one."
+              "Two hearts that found their forever in each other.” ❤️
             </p>
 
             <FloralVineDivider variant="light" className="my-4 max-w-sm mx-auto" />

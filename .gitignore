@@ -44,3 +44,7 @@ build/
 *.njsproj
 *.sln
 *.sw?
+
+changes.patch
+wedding_changes.bundle
+wedding_changes.patch
